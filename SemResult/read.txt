@@ -1,0 +1,10 @@
+How to run
+Make sure XAMPP is running (Apache,SQL)
+Copy the folder to C:\xampp\htdocs\SemResult\
+Open browser → http://localhost/SemResult/index.php
+
+
+Pass Criteria Used
+Minimum 40/100 total per subject
+Minimum 28/70 in ESE (40% of ESE)
+Grade: O ≥ 90 | A+ ≥ 80 | A ≥ 70 | B+ ≥ 60 | B ≥ 50 | F < 50

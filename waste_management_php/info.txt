@@ -1,0 +1,14 @@
+Start XAMPP → Apache + MySQL
+Open → http://localhost/phpmyadmin
+Click New → create database waste_db
+Go to SQL tab → run:
+CREATE TABLE waste_reports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(50),
+    location VARCHAR(255),
+    description TEXT,
+    status VARCHAR(50) DEFAULT 'Pending'
+);
+Place project in:
+C:\xampp\htdocs\waste_management_php
+http://localhost/waste_management_php/index.php

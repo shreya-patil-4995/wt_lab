@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration System</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #1565c0;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 22px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card h2 {
+            font-size: 18px;
+            margin-bottom: 18px;
+            border-bottom: 2px solid #1565c0;
+            padding-bottom: 8px;
+            color: #1565c0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 9px 12px;
+            margin-bottom: 16px;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #1565c0;
+        }
+
+        button {
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0d47a1;
+        }
+
+        #message {
+            margin-top: 12px;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        table thead {
+            background-color: #1565c0;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 10px 14px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f1f5fb;
+        }
+
+        table tbody tr:hover {
+            background-color: #e3eaf7;
+        }
+
+        #loadBtn {
+            background-color: #388e3c;
+            margin-bottom: 16px;
+        }
+
+        #loadBtn:hover {
+            background-color: #2e7d32;
+        }
+
+        #noData {
+            color: #888;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Student Registration System</h1>
+</header>
+
+<div class="container">
+
+    <!-- Registration Form -->
+    <div class="card">
+        <h2>Register New Student</h2>
+        <form id="registrationForm">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter student name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter email address" required>
+
+            <label for="course">Course</label>
+            <select id="course" required>
+                <option value="">-- Select Course --</option>
+                <option value="B.Tech CSE">B.Tech CSE</option>
+                <option value="B.Tech ECE">B.Tech ECE</option>
+                <option value="B.Tech IT">B.Tech IT</option>
+                <option value="B.Tech EEE">B.Tech EEE</option>
+                <option value="MCA">MCA</option>
+                <option value="MBA">MBA</option>
+            </select>
+
+            <button type="submit">Register Student</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <!-- Student List -->
+    <div class="card">
+        <h2>Registered Students</h2>
+        <button id="loadBtn" onclick="loadStudents()">Load / Refresh Student List</button>
+        <p id="noData">No students registered yet.</p>
+        <table id="studentTable" style="display:none;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                </tr>
+            </thead>
+            <tbody id="studentBody">
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+    // Handle Registration Form Submit (Task 3)
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const course = document.getElementById('course').value;
+
+        const msgBox = document.getElementById('message');
+
+        fetch('/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, course })
+        })
+        .then(res => res.json())
+        .then(data => {
+            msgBox.style.display = 'block';
+            if (data.message.includes('successfully')) {
+                msgBox.className = 'success';
+                msgBox.textContent = data.message;
+                document.getElementById('registrationForm').reset();
+            } else {
+                msgBox.className = 'error';
+                msgBox.textContent = data.message;
+            }
+        })
+        .catch(err => {
+            msgBox.style.display = 'block';
+            msgBox.className = 'error';
+            msgBox.textContent = 'Server error. Please try again.';
+        });
+    });
+
+    // Task 4 & 5: Load students from /students API and display in table
+    function loadStudents() {
+        fetch('/students')
+        .then(res => res.json())
+        .then(students => {
+            const tbody = document.getElementById('studentBody');
+            const table = document.getElementById('studentTable');
+            const noData = document.getElementById('noData');
+
+            tbody.innerHTML = '';
+
+            if (students.length === 0) {
+                table.style.display = 'none';
+                noData.style.display = 'block';
+                return;
+            }
+
+            noData.style.display = 'none';
+            table.style.display = 'table';
+
+            students.forEach(student => {
+                const row = `<tr>
+                    <td>${student.id}</td>
+                    <td>${student.name}</td>
+                    <td>${student.email}</td>
+                    <td>${student.course}</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        })
+        .catch(err => {
+            alert('Failed to load students.');
+        });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Traffic Signal</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #222;
+        }
+        
+        .signal {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .light {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #111;
+        }
+        
+        .red.active {
+            background: red;
+            box-shadow: 0 0 20px red;
+        }
+        
+        .yellow.active {
+            background: yellow;
+            box-shadow: 0 0 20px yellow;
+        }
+        
+        .green.active {
+            background: green;
+            box-shadow: 0 0 20px green;
+        }
+        /* Responsive */
+        
+        @media (max-width: 500px) {
+            .light {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signal">
+        <div class="light red" id="red"></div>
+        <div class="light yellow" id="yellow"></div>
+        <div class="light green" id="green"></div>
+    </div>
+
+    <script>
+        const red = document.getElementById("red");
+        const yellow = document.getElementById("yellow");
+        const green = document.getElementById("green");
+
+        function turnOff() {
+            red.classList.remove("active");
+            yellow.classList.remove("active");
+            green.classList.remove("active");
+        }
+
+        function startSignal() {
+
+            turnOff();
+            red.classList.add("active");
+
+            setTimeout(() => {
+                turnOff();
+                yellow.classList.add("active");
+            }, 2000);
+
+            setTimeout(() => {
+                turnOff();
+                green.classList.add("active");
+            }, 4000);
+
+            setTimeout(startSignal, 6000);
+        }
+
+        startSignal();
+    </script>
+
+</body>
+
+</html>

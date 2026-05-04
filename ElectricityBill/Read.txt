@@ -1,0 +1,4 @@
+How to run
+Make sure XAMPP is running (Apache)
+Copy the folder to C:\xampp\htdocs\ElectricityBill\
+Open browser → http://localhost/ElectricityBill/index.php

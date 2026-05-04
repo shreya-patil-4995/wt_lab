@@ -1,0 +1,10 @@
+mvn spring-boot:run
+
+get http://localhost:8080/orders
+
+post http://localhost:8080/orders
+body:{
+  "product": "Laptop",
+  "quantity": 2,
+  "price": 50000
+}

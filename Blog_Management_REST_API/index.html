@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog Manager</title>
+</head>
+
+<body>
+
+    <h2>Blog Manager</h2>
+
+    <!-- ADD BLOG -->
+    <input type="text" id="titleInput" placeholder="Enter title"><br><br>
+    <textarea id="contentInput" placeholder="Enter content"></textarea><br><br>
+
+    <button onclick="addBlog()">Add Blog</button>
+
+    <h3>Blogs:</h3>
+    <ul id="blogList"></ul>
+
+    <script>
+        const API = "http://localhost:3000/blogs";
+
+        // LOAD BLOGS
+        async function loadBlogs() {
+            const res = await fetch(API);
+            const data = await res.json();
+
+            const list = document.getElementById("blogList");
+            list.innerHTML = "";
+
+            data.forEach(blog => {
+                const li = document.createElement("li");
+                li.textContent = blog.title + " - " + blog.content;
+                list.appendChild(li);
+            });
+        }
+
+        // ADD BLOG
+        async function addBlog() {
+            const title = document.getElementById("titleInput").value;
+            const content = document.getElementById("contentInput").value;
+
+            if (title === "" || content === "") {
+                alert("Enter title and content");
+                return;
+            }
+
+            await fetch(API, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    title: title,
+                    content: content
+                })
+            });
+
+            document.getElementById("titleInput").value = "";
+            document.getElementById("contentInput").value = "";
+
+            loadBlogs();
+        }
+
+        // LOAD ON START
+        loadBlogs();
+    </script>
+
+</body>
+
+</html>

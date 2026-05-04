@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Order Management</title>
+</head>
+
+<body>
+
+    <h2>Order System</h2>
+
+    <input id="product" placeholder="Product"><br><br>
+    <input id="quantity" placeholder="Quantity"><br><br>
+    <input id="price" placeholder="Price"><br><br>
+
+    <button onclick="addOrder()">Add Order</button>
+
+    <h3>Orders:</h3>
+    <ul id="list"></ul>
+
+    <script>
+        const API = "http://localhost:8080/orders";
+
+        // ADD
+        async function addOrder() {
+            const order = {
+                product: document.getElementById("product").value,
+                quantity: parseInt(document.getElementById("quantity").value),
+                price: parseFloat(document.getElementById("price").value)
+            };
+
+            await fetch(API, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(order)
+            });
+
+            loadOrders();
+        }
+
+        // LOAD
+        async function loadOrders() {
+            const res = await fetch(API);
+            const data = await res.json();
+
+            const list = document.getElementById("list");
+            list.innerHTML = "";
+
+            data.forEach(o => {
+                const li = document.createElement("li");
+                li.innerText = `${o.product} - Qty:${o.quantity} - ₹${o.price}`;
+                list.appendChild(li);
+            });
+        }
+
+        loadOrders();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+Open XAMPP Control Panel:
+
+Start:
+
+Apache
+MySQL
+
+
+open database-http://localhost/phpmyadmin
+
+create database-CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    course VARCHAR(100)
+);
+
+insert data: INSERT INTO students (name, email, course) VALUES
+('Shreya', 'shreya@gmail.com', 'CSE'),
+('Vedika', 'vedika@gmail.com', 'IT'),
+('Rahul', 'rahul@gmail.com', 'Mechanical');
+
+
+open in browser:
+http://localhost/Student_record_php/index.php

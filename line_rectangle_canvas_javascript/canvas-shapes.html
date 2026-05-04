@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Canvas Drawing</title>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+        }
+        
+        canvas {
+            border: 2px solid black;
+            width: 80%;
+            max-width: 600px;
+        }
+        
+        button {
+            margin: 10px;
+            padding: 8px 12px;
+        }
+        
+        .active {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Canvas Drawing</h2>
+
+
+    <button id="lineBtn" onclick="setMode('line')">Draw Line</button>
+    <button id="rectBtn" onclick="setMode('rect')">Draw Rectangle</button>
+
+    <br>
+
+    <canvas id="canvas" width="600" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        let mode = "line"; // default
+        let points = [];
+
+        // handle mouse click
+        canvas.addEventListener("click", function(e) {
+
+            const rect = canvas.getBoundingClientRect();
+
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            points.push({
+                x,
+                y
+            });
+
+            // draw after 2 clicks
+            if (points.length === 2) {
+
+                const p1 = points[0];
+                const p2 = points[1];
+
+                if (mode === "line") {
+                    ctx.beginPath();
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
+
+                if (mode === "rect") {
+                    const width = p2.x - p1.x;
+                    const height = p2.y - p1.y;
+                    ctx.strokeRect(p1.x, p1.y, width, height);
+                }
+
+                points = []; // reset
+            }
+        });
+
+        function setMode(selectedMode) {
+            mode = selectedMode;
+
+            // remove active from both
+            document.getElementById("lineBtn").classList.remove("active");
+            document.getElementById("rectBtn").classList.remove("active");
+
+            // add active to selected
+            if (mode === "line") {
+                document.getElementById("lineBtn").classList.add("active");
+            } else {
+                document.getElementById("rectBtn").classList.add("active");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

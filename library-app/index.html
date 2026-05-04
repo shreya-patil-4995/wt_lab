@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Library</title>
+</head>
+
+<body>
+
+    <h2>Library System</h2>
+
+    <input id="id" placeholder="Book ID"><br><br>
+    <input id="title" placeholder="Title"><br><br>
+    <input id="author" placeholder="Author"><br><br>
+    <input id="year" placeholder="Year"><br><br>
+
+    <button onclick="addBook()">Add Book</button>
+
+    <h3>Books:</h3>
+    <ul id="list"></ul>
+
+    <script>
+        const API = "http://localhost:3000/books";
+
+        // ADD BOOK
+        async function addBook() {
+            const book = {
+                book_id: document.getElementById("id").value,
+                title: document.getElementById("title").value,
+                author: document.getElementById("author").value,
+                year: document.getElementById("year").value
+            };
+
+            await fetch(API, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(book)
+            });
+
+            loadBooks();
+        }
+
+        // LOAD BOOKS
+        async function loadBooks() {
+            const res = await fetch(API);
+            const data = await res.json();
+
+            const list = document.getElementById("list");
+            list.innerHTML = "";
+
+            data.forEach(b => {
+                const li = document.createElement("li");
+                li.textContent = `${b.title} - ${b.author} (${b.year})`;
+                list.appendChild(li);
+            });
+        }
+
+        loadBooks();
+    </script>
+
+</body>
+
+</html>

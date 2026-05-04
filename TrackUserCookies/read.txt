@@ -1,0 +1,11 @@
+How to test the system during your exam:
+
+Start Apache and MySQL from your XAMPP Control Panel.
+Go to your browser and open http://localhost/TrackUserCookies/.
+It will redirect to the Login page. Click on the "Register" link at the bottom.
+Create a new user account.
+Log in with the newly created account.
+Check your Dashboard. It will state that you're using Sessions and have active Tracking Cookies.
+Close the browser and reopen the URL; the cookies should automatically log you back in.
+Click "Logout" to terminate both the session and the cookies.
+The code is straightforward, strictly addressing the requirements without any complicated frameworks. Good luck with your lab exam! Let me know if you need any adjustments to the code.

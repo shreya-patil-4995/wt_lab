@@ -1,0 +1,15 @@
+Start XAMPP → Apache + MySQL
+Open browser → http://localhost/phpmyadmin
+Click New → create database complaint_db
+Go to SQL tab → run:
+CREATE TABLE complaints (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    organization VARCHAR(100),
+    complaint TEXT,
+    status VARCHAR(50) DEFAULT 'Pending'
+);
+
+
+http://localhost/complaint_system_php/index.php

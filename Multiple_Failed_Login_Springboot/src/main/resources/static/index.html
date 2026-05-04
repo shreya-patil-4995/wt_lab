@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Page</title>
+</head>
+
+<body>
+
+    <h2>Login</h2>
+
+    <input type="text" id="username" placeholder="Enter username"><br><br>
+    <input type="password" id="password" placeholder="Enter password"><br><br>
+
+    <button onclick="login()">Login</button>
+
+    <p id="result"></p>
+
+    <script>
+        async function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === "" || password === "") {
+                alert("Enter username and password");
+                return;
+            }
+
+            const res = await fetch(
+                `http://localhost:8080/login?username=${username}&password=${password}`
+            );
+
+            const text = await res.text();
+
+            document.getElementById("result").innerText = text;
+        }
+    </script>
+
+</body>
+
+</html>

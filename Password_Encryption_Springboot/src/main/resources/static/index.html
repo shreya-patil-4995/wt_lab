@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Auth System</title>
+</head>
+
+<body>
+
+    <h2>Register</h2>
+    <input id="regUser" placeholder="Username"><br><br>
+    <input id="regPass" placeholder="Password"><br><br>
+    <button onclick="register()">Register</button>
+
+    <h2>Login</h2>
+    <input id="logUser" placeholder="Username"><br><br>
+    <input id="logPass" placeholder="Password"><br><br>
+    <button onclick="login()">Login</button>
+
+    <p id="result"></p>
+
+    <script>
+        async function register() {
+            const u = document.getElementById("regUser").value;
+            const p = document.getElementById("regPass").value;
+
+            const res = await fetch(`http://localhost:8080/register?username=${u}&password=${p}`);
+            const text = await res.text();
+
+            document.getElementById("result").innerText = text;
+        }
+
+        async function login() {
+            const u = document.getElementById("logUser").value;
+            const p = document.getElementById("logPass").value;
+
+            const res = await fetch(`http://localhost:8080/login?username=${u}&password=${p}`);
+            const text = await res.text();
+
+            document.getElementById("result").innerText = text;
+        }
+    </script>
+
+</body>
+
+</html>

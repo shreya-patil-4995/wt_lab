@@ -1,0 +1,6 @@
+How to test it during the exam:
+Ensure your XAMPP Apache and MySQL services are running.
+Open http://localhost/ConcurrentSessions/ in your browser.
+Login using any username (e.g., student1).
+To test the concurrency limit, open other browsers or Incognito/Private windows and login using the same username.
+The 4th attempt will be blocked unless you click "Logout" on one of the active sessions or wait 5 minutes for inactivity to clear a session.

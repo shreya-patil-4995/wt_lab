@@ -1,0 +1,19 @@
+mvn spring-boot:run
+
+then - http://localhost:8080/login?username=admin&password=123
+login successfull 
+
+then put wrong credentials 
+http://localhost:8080/login?username=admin&password=12345
+do 3 times then it will get locked and say try after few minutes
+
+
+also you can run ui 
+http://localhost:8080/index.html
+and put username=admin
+password=123
+
+incorrect ->put anything login 3 -4 times . u will get account as locked
+
+
+

@@ -1,0 +1,5 @@
+How to run
+Make sure XAMPP is running (Apache + MySQL)
+Copy the folder to C:\xampp\htdocs\DBOperationsPHPSQL\
+Open browser → http://localhost/DBOperationsPHPSQL/index.php
+No need to manually create the DB or table — the script handles it automatically on first load.

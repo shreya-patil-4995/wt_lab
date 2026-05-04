@@ -1,0 +1,5 @@
+How to Run
+Place the folder in your XAMPP htdocs directory and open:
+
+http://localhost/UserInputManageSessions/index.php
+Make sure Apache is running in XAMPP.

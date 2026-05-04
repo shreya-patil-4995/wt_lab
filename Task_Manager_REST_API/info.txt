@@ -1,0 +1,2 @@
+run - node index.js - will run on 3000 port
+open index.html in 3000 port , http://localhost:3000/index.html

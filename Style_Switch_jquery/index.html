@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Style Switcher</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        input,
+        button {
+            padding: 8px;
+            margin: 5px;
+        }
+        /* Style 1 */
+        
+        .style1 {
+            background-color: #f0f8ff;
+            color: #000;
+        }
+        /* Style 2 */
+        
+        .style2 {
+            background-color: #222;
+            color: white;
+        }
+        /* Style 3 */
+        
+        .style3 {
+            background-color: #ffe4b5;
+            color: #333;
+            font-family: cursive;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>jQuery Style Switcher</h2>
+
+    <input type="text" placeholder="Enter text">
+    <p id="output"></p>
+    <br>
+
+    <button id="btn1">Style 1</button>
+    <button id="btn2">Style 2</button>
+    <button id="btn3">Style 3</button>
+
+    <script>
+        $(document).ready(function() {
+
+            $("#btn1").click(function() {
+                $("body").removeClass().addClass("style1");
+            });
+
+            $("#btn2").click(function() {
+                $("body").removeClass().addClass("style2");
+            });
+
+            $("#btn3").click(function() {
+                $("body").removeClass().addClass("style3");
+            });
+
+            $("input").on("input", function() {
+                $("#output").text($(this).val());
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

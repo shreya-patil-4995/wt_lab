@@ -1,0 +1,19 @@
+run - node index.js
+and open http://localhost:3000/index.html
+
+for postman->
+use postman :
+post http://localhost:3000/blogs , in body-> json->raw put 
+{
+  "id": 3,
+  "title": "mental health",
+  "content": "its very important to have healthy mind , so that we make take decision calmly and perform and live better in our day today life"
+}
+
+get http://localhost:3000/blogs in postman
+
+for browser->
+and then do  get http://localhost:3000/blogs
+
+
+
