@@ -5,4 +5,3 @@ First, go to "Student Registration" and register a couple of dummy students.
 Next, go to "Take Attendance", select the date, check/uncheck the boxes, and hit save to record attendance.
 Let me know if you'd like any modifications to the code!
 
-x

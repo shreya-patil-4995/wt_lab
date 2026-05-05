@@ -1,5 +1,0 @@
-com\example\ProdInventory\controller\ProductController.class
-com\example\ProdInventory\security\SecurityConfig.class
-com\example\ProdInventory\repository\ProductRepository.class
-com\example\ProdInventory\ProdInventoryApplication.class
-com\example\ProdInventory\model\Product.class

@@ -1,7 +1,7 @@
 Start XAMPP → Apache + MySQL
 Open → http://localhost/phpmyadmin
-Click New → create DB college_complaint_db
-SQL tab → run:
+Click New → create DATABASE college_complaint_db
+SQL tab → run: (ctrl+enter)
 CREATE TABLE students (
  id INT AUTO_INCREMENT PRIMARY KEY,
  username VARCHAR(50),
